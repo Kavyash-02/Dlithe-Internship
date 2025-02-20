@@ -1,0 +1,59 @@
+#1 LED
+ void setup() {
+  pinMode(42, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+ digitalWrite(42, HIGH);
+ Serial.println("Led is on");
+ delay(1000);
+ digitalWrite(42, LOW);
+ Serial.println("Led is off");
+ delay(1000);
+}
+
+
+#2 BUZZER
+ void setup() {
+  pinMode(42, OUTPUT);
+  pinMode(6, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+ digitalWrite(42, HIGH);
+ digitalWrite(6, LOW);
+ Serial.println("Led is on");
+ delay(1000);
+ digitalWrite(42, LOW);
+ digitalWrite(6,HIGH);
+ Serial.println("Led is off");
+ delay(1000);
+}
+
+
+#3 RELAY
+void setup() {
+  pinMode(42, OUTPUT);
+  pinMode(6, OUTPUT);
+  pinMode(5, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+ digitalWrite(42, HIGH);
+ Serial.println("Led is on");
+  delay(1000);
+ digitalWrite(6, LOW);
+ delay(1000);
+ digitalWrite(5, HIGH);
+ delay(1000);
+ digitalWrite(42, LOW);
+ Serial.println("Led is off");
+ delay(1000);
+  digitalWrite(6,HIGH);
+ delay(1000);
+ digitalWrite(5, LOW);
+ delay(1000);
+}
