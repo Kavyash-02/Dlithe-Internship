@@ -1,0 +1,156 @@
+#4 IR SENSOR
+  int IR=11;
+void setup() {
+  pinMode(IR, INPUT);
+  Serial.begin(9600);
+  }
+
+void loop() {
+  int IRvalue=digitalRead(IR);
+  if(IRvalue==HIGH)
+  {
+    Serial.println("Object is detected");
+  }
+  else
+  {
+    Serial.println("Object is not detected");
+  }
+}
+
+
+#5 IR & LED
+  int IR=11;
+int Led=42;
+void setup() {
+  pinMode(IR, INPUT);
+  pinMode(Led, OUTPUT);
+  Serial.begin(9600);
+  }
+
+void loop() {
+  int IRvalue=digitalRead(IR);
+  if(IRvalue==HIGH)
+  {
+    Serial.println("Object is detected");
+    digitalWrite(Led, HIGH);
+  }
+  else
+  {
+    Serial.println("Object is not detected");
+    digitalWrite(Led, Low);
+  }
+}
+
+
+#6 IR, BUZZER & LED
+int IR=11;
+int Led=42;
+int Buzzer=6;
+void setup() {
+  pinMode(IR, INPUT);
+  pinMode(Led, OUTPUT);
+  pinMode(Buzzer, OUTPUT);
+  Serial.begin(9600);
+  }
+
+void loop() {
+  int IRvalue=digitalRead(IR);
+  if(IRvalue==HIGH)
+  {
+    Serial.println("Object is detected");
+    digitalWrite(Led, HIGH);
+    delay(1000);
+  }
+  else
+  {
+    Serial.println("Object is not detected");
+    digitalWrite(Buzzer, HIGH);
+    delay(1000);
+  }
+}
+
+
+#7 SOUNDSENSOR
+int sound=A0;
+void setup() {
+  pinMode(SS, INPUT);
+  Serial.begin(9600);
+  }
+
+void loop() {
+  int sensorvalue=analogRead(sound);
+  Serial.println(sensorvalue);
+  delay(1000);
+}
+
+
+#8 SOUNDSENSOR WITH LED
+int sound=A0;
+int Led=42;
+void setup() {
+  pinMode(sound, INPUT);
+  pinMode(Led, OUTPUT);
+  Serial.begin(9600);
+  }
+
+void loop() {
+  int sensorvalue=analogRead(sound);
+  if(sensorvalue >500){
+    digitalWrite(Led, HIGH);
+    Serial.println("sensorvalue is high");
+    delay(1000);
+  }
+  else
+  {
+    digitalWrite(Led, LOW);
+    Serial.println("sensorvalue is low");
+    delay(1000);
+  }
+}
+
+
+#9 TOUCHSENSOR
+int touch=2;
+void setup() {
+  pinMode(touch, INPUT);
+  Serial.begin(9600);
+  }
+
+void loop() {
+  int touchvalue=digitalRead(touch);
+  if(touchvalue==HIGH)
+  {
+    Serial.println("touch is detected");
+    delay(2000);
+  }
+  else
+  {
+    Serial.println("touch is not detected");
+    delay(2000);
+  }
+}
+
+
+#10 SOILSENSOR
+int soilsensor=A0;
+int buzzer=6;
+void setup() {
+  pinMode(soilsensor, INPUT);
+  pinMode(buzzer, OUTPUT);
+  Serial.begin(9600);
+  }
+
+void loop() {
+  int sensorvalue=analogRead(soilsensor);
+  if(sensorvalue < 500)
+  {
+    Serial.println("sensorvalue");
+    digitalWrite(buzzer, HIGH);
+    delay(2000);
+  }
+  else
+  {
+    digitalWrite(buzzer, LOW);
+    delay(2000);
+  }
+}
