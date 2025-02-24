@@ -1,0 +1,116 @@
+#11 RELAY WITH MOTOR
+int Relay=5;
+void setup() {
+  pinMode(Relay, OUTPUT);
+  Serial.begin(9600); 
+}
+
+void loop() {
+  int relayvalue=digitalRead(Relay);
+  digitalWrite(Relay, HIGH);
+  Serial.println("Motor is ON");
+  delay(5000);
+   digitalWrite(Relay, LOW);
+  Serial.println("Motor is OFF");
+  delay(10000);
+}
+
+
+#12 IR WITH RELAY
+int IR=12;
+int Relay=5;
+void setup() {
+  pinMode(IR, INPUT);
+  pinMode(Relay, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int IRvalue=digitalRead(IR);
+  if(IRvalue==HIGH)
+  {
+    Serial.println("Object detected");
+    digitalWrite(Relay, HIGH);
+    delay(5000);
+  }
+  else
+  {
+    Serial.println("Object not detected");
+    digitalWrite(Relay, LOW);
+    delay(10000);
+  }
+
+
+#13 ULTRASONIC SENSOR
+int Led=42;
+int Buzzer=6;
+int Relay=5;
+int ultrasonic=12;
+void setup() {
+  pinMode(Led, OUTPUT);
+  pinMode(Buzzer, OUTPUT);
+  pinMode(Relay, OUTPUT);
+  pinMode(ultrasonic, INPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int ultrasonicvalue=digitalRead(ultrasonic);
+  if(ultrasonicvalue<500)
+  {
+    digitalWrite(Led, HIGH);
+    digitalWrite(Relay, LOW);
+    digitalWrite(Buzzer, LOW);
+    delay(1000);
+     digitalWrite(Led,LOW);
+    digitalWrite(Relay, HIGH);
+    digitalWrite(Buzzer, LOW);
+    delay(1000);
+    digitalWrite(Led,LOW);
+    digitalWrite(Relay, LOW);
+    digitalWrite(Buzzer, HIGH);
+    delay(1000);
+  }
+  else{
+    Serial.println("distance is above 500");
+    delay(1000);
+      }
+}
+
+
+#14 DHT11
+#include <Bonezegei_DHT11.h>
+Bonezegei_DHT11 dht(14);
+int Relay=5;
+void setup() {
+  pinMode(Relay, OUTPUT);
+  Serial.begin(115200);
+  dht.begin();
+}
+
+void loop() {
+  if (dht.getData()) {                         
+    float tempDeg = dht.getTemperature();      
+    float tempFar = dht.getTemperature(true);  
+    int hum = dht.getHumidity();               
+    String str  = "Temperature: ";
+           str += tempDeg;
+           str += "°C  ";
+           str += tempFar;
+           str += "°F  Humidity:";
+           str += hum;
+    Serial.println(str.c_str());
+  if(tempDeg<30)
+  {
+    digitalWrite(Relay, HIGH);
+    Serial.println("Fan turns on");
+    delay(2000);
+  }
+  else
+  {
+    digitalWrite(Relay, LOW);
+    Serial.println("Fan turns off");
+    delay(2000);
+  }
+  }
+}
