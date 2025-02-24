@@ -1,0 +1,155 @@
+#15 BLYNK
+
+#define BLYNK_TEMPLATE_ID "TMPL3HwFyJg1m"
+#define BLYNK_TEMPLATE_NAME "Led"
+#define BLYNK_AUTH_TOKEN "SYU9SvYhQTnasCwL0YKzVyhw0miDVW9J"
+#define BLYNK_PRINT Serial
+#include<WiFi.h>
+#include<BlynkSimpleEsp32.h>
+
+char auth[] = BLYNK_AUTH_TOKEN;
+char ssid[] = "Redmi";
+char pass[] = "kavya123";
+
+BLYNK_WRITE(V0){
+  int pinvalue=param.asInt();
+  digitalWrite(13,pinvalue);
+}
+void setup() {
+ Serial.begin(9600);
+ pinMode(13,OUTPUT);
+ WiFi.begin(ssid,pass);
+ while(WiFi.status() != WL_CONNECTED){
+  delay(500);
+  Serial.println("Not connected");
+ }
+ Serial.println("Connected");
+ Blynk.begin(auth,ssid,pass);
+
+}
+
+void loop() {
+  Blynk.run();
+}
+
+
+
+#16 GASSENSOR
+int GasSensor=A0;
+int buzzer=6;
+void setup() {
+  pinMode(GasSensor, INPUT);
+  pinMode(buzzer, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int Gasvalue=analogRead(GasSensor);
+  if(Gasvalue>5)
+  {
+    digitalWrite(buzzer, HIGH);
+    Serial.println("gas is detected");
+    delay(1000);
+  }
+  else
+  {
+    digitalWrite(buzzer, LOW);
+    Serial.println("gas is not detected");
+    delay(1000);
+  }
+}
+
+
+#17 FLAMESENSOR
+int flameSensor=2;
+int buzzer=6;
+int led=42;
+void setup() {
+  pinMode(flameSensor, INPUT);
+  pinMode(buzzer, OUTPUT);
+  pinMode(led, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int flamevalue=digitalRead(flameSensor);
+  if(flamevalue==HIGH)
+  {
+    digitalWrite(buzzer, HIGH);
+    digitalWrite(led, HIGH);
+    Serial.println("flame is detected");
+    delay(1000);
+  }
+  else
+  {
+    digitalWrite(buzzer, LOW);
+    digitalWrite(led, LOW);
+    Serial.println("flame is not detected");
+    delay(1000);
+  }
+}
+
+#18 LAZER
+int Lazer=2;
+int IR=12;
+int buzzer=6;
+void setup() {
+  pinMode(IR, INPUT);
+  pinMode(Lazer, OUTPUT);
+  pinMode(buzzer, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int IRvalue=digitalRead(IR);
+  if(IRvalue==0)
+  {
+    digitalWrite(Lazer, HIGH);
+    digitalWrite(buzzer, HIGH);
+    Serial.println("Object is detected");
+    delay(1000);
+  }
+  else
+  {
+    digitalWrite(Lazer, LOW);
+    digitalWrite(buzzer, LOW);
+    Serial.println("Object is not detected");
+    delay(1000);
+  }
+}
+
+#19 TILTSENSOR
+int tiltsensor=A0;
+int buzzer=6;
+int led=42;
+void setup() {
+  pinMode(tiltsensor, INPUT);
+  pinMode(buzzer, OUTPUT);
+  pinMode(led, OUTPUT);
+}
+
+void loop() {
+int tiltvalue=analogRead(tiltsensor);
+  if(tiltvalue==90)
+  {
+    digitalWrite(buzzer,LOW);
+    digitalWrite(led, LOW);
+    Serial.println("Moving in 90 deg");
+    delay(1000);
+}
+else if(tiltvalue==180)
+{
+    digitalWrite(buzzer,LOW);
+    digitalWrite(led, HIGH);
+    Serial.println("Moving in 180 deg");
+    delay(1000);
+}
+else
+{
+    digitalWrite(buzzer,HIGH);
+    digitalWrite(led, HIGH);
+    Serial.println("Moving in 360 deg");
+    delay(1000); 
+}
+}
+
